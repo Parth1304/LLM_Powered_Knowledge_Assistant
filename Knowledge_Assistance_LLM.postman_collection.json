@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "knowledge-assistance-llm-collection",
+		"name": "Knowledge Assistance LLM API",
+		"description": "API collection for the Knowledge Assistance LLM project - a Django-based knowledge management system with AI-powered Q&A capabilities.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "knowledge-assistance-llm"
+	},
+	"item": [
+		{
+			"name": "Knowledge Base",
+			"item": [
+				{
+					"name": "List Documents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/knowledge-base/documents/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"knowledge-base",
+								"documents",
+								""
+							]
+						},
+						"description": "Retrieve a list of all uploaded documents in the knowledge base."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/knowledge-base/documents/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"knowledge-base",
+										"documents",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"documents\": [\n        {\n            \"id\": 1,\n            \"name\": \"sample_document.pdf\",\n            \"uploaded_at\": \"2024-01-15T10:30:00Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"research_paper.txt\",\n            \"uploaded_at\": \"2024-01-15T11:45:00Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for managing documents in the knowledge base."
+		},
+		{
+			"name": "LLM Assistant",
+			"item": [
+				{
+					"name": "Ask Question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\": \"What is the main topic discussed in the uploaded documents?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/llm-assistant/ask-question/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"llm-assistant",
+								"ask-question",
+								""
+							]
+						},
+						"description": "Ask a question about the uploaded documents. The system will use AI to search through the knowledge base and provide an answer."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question\": \"What is the main topic discussed in the uploaded documents?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/llm-assistant/ask-question/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"llm-assistant",
+										"ask-question",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"answer\": \"The main topic discussed in the uploaded documents is artificial intelligence and machine learning applications in modern technology. The documents cover various aspects including neural networks, deep learning algorithms, and their practical implementations in real-world scenarios.\",\n    \"sources\": [\n        \"sample_document.pdf\",\n        \"research_paper.txt\"\n    ]\n}"
+						},
+						{
+							"name": "No Documents Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question\": \"What is the main topic?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/llm-assistant/ask-question/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"llm-assistant",
+										"ask-question",
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"No documents found in database. Please upload some documents first through the admin panel.\"\n}"
+						},
+						{
+							"name": "No Question Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/llm-assistant/ask-question/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"llm-assistant",
+										"ask-question",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"No question provided\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for AI-powered question answering using the knowledge base."
+		},
+		{
+			"name": "Admin Panel",
+			"item": [
+				{
+					"name": "Django Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								""
+							]
+						},
+						"description": "Access the Django admin panel to upload and manage documents. This is a web interface, not an API endpoint."
+					},
+					"response": []
+				}
+			],
+			"description": "Web interface for document management (not API endpoints)."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string",
+			"description": "Base URL for the Knowledge Assistance LLM API"
+		}
+	]
+} 

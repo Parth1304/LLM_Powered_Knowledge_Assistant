@@ -1,0 +1,39 @@
+# Ignore virtual environment
+venv/
+.venv/
+
+# Ignore environment variables
+.env
+
+# Ignore all JSON files (including API credentials)
+authenticatepy-eed22-3139f52e3ec8.json
+
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+
+# SQLite database
+*.sqlite3
+*.db
+
+# Media and static
+media/
+static/
+staticfiles/
+
+# VS Code & PyCharm
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*~
+
+# Git ignore backups
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
